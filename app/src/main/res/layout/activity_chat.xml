@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    tools:context=".ChatActivity">
+    
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Theme.Dialog.AppBarOverlay">
+        
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            style="@style/Theme.Dialog.PopupOverlay"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp">
+            
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:id="@+id/back"
+                    android:padding="8dp"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/left_96px"
+                    android:adjustViewBounds="true"
+                    app:tint="@color/black"
+                    android:contentDescription="@string/back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+    
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ct_title_box"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+        
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile"
+                        style="@style/Theme.Dialog.FontBold"
+                        android:textSize="18sp"
+                        android:id="@+id/ct_title"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        app:layout_constraintEnd_toStartOf="@id/ct_title_expand"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+        
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:id="@+id/ct_title_expand"
+                        android:adjustViewBounds="true"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="2dp"
+                        android:padding="2dp"
+                        app:tint="@color/colorPrimaryDark"
+                        android:src="@drawable/expand_arrow_96px"
+                        android:contentDescription="@string/expand"
+                        app:layout_constraintStart_toEndOf="@id/ct_title"
+                        app:layout_constraintTop_toTopOf="@id/ct_title"
+                        app:layout_constraintBottom_toBottomOf="@id/ct_title"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+    
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:id="@+id/more"
+                    android:padding="8dp"
+                    android:contentDescription="@string/more"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/menu_vertical_96px"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+                
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            
+        </androidx.appcompat.widget.Toolbar>
+        
+    </com.google.android.material.appbar.AppBarLayout>
+    
+    <include android:id="@+id/chat_box" layout="@layout/content_chat"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

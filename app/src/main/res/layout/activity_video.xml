@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    
+    <FrameLayout
+        android:id="@+id/remote_video_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white" />
+    
+    
+    <androidx.cardview.widget.CardView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:id="@+id/local_video_view_container"
+        app:cardUseCompatPadding="false"
+        app:cardPreventCornerOverlap="false"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp"
+        android:clipChildren="true"
+        android:clipToPadding="false"
+        app:cardBackgroundColor="@android:color/darker_gray"/>
+    
+    <androidx.cardview.widget.CardView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:id="@+id/local_video_view_container_sec"
+        app:cardUseCompatPadding="false"
+        app:cardPreventCornerOverlap="false"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/local_video_view_container"
+        android:layout_margin="16dp"
+        android:clipChildren="true"
+        android:clipToPadding="false"
+        app:cardBackgroundColor="@android:color/darker_gray"/>
+</RelativeLayout>

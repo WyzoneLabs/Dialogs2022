@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PinView">
+        <attr name="pCount" format="integer"/>
+        <attr name="pSize" format="dimension"/>
+        <attr name="pWidth" format="dimension"/>
+        <attr name="pHeight" format="dimension"/>
+        <attr name="pGap" format="dimension"/>
+        <attr name="pTextSize" format="dimension"/>
+        <attr name="pTextColor" format="color"/>
+        <attr name="pTextColorSelected" format="color"/>
+        <attr name="pFont" format="string"/>
+        <attr name="pBackground" format="reference"/>
+        <attr name="pBackgroundFilled" format="reference"/>
+    </declare-styleable>
+    
+    <color name="isw_defaultBg">@color/colorBackground</color>
+    <declare-styleable name="BeinSwitch">
+        <attr format="reference" name="isw_icon_left"/>
+        <attr format="reference" name="isw_icon_right"/>
+        <attr format="dimension" name="isw_icon_size"/>
+        <attr format="color" name="isw_background_color"/>
+        <attr format="color" name="isw_thumb_color_left"/>
+        <attr format="color" name="isw_thumb_color_right"/>
+        <attr format="color" name="isw_inactive_tint_icon_left"/>
+        <attr format="color" name="isw_inactive_tint_icon_right"/>
+        <attr format="color" name="isw_active_tint_icon_left"/>
+        <attr format="color" name="isw_active_tint_icon_right"/>
+        <attr format="enum" name="isw_default_selection">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr >
+    </declare-styleable>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="agora_app_id" translatable="false">5cdfce43155f4133a10ea19cb5e8a9b3</string>
+    <string name="agora_app_cert" translatable="false">4a9c6858ce044971b594e3351ffcb875</string>
+    <string name="agora_channel">CHANNEL_123</string>
+    <string name="agora_access_token" translatable="false">006dddb266ee1694f3c9762891f22451f29IACRuioZSk1tzbCFrNfWXMMw3Mww09fToHiC2IYUmZ16OUrLe24AAAAAEAATtvR9r9cYYgEAAQCv1xhi</string>
+</resources>

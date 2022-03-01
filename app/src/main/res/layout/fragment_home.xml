@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="fragments.main.HomeFragment">
+    
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="0dp"
+           android:layout_height="@dimen/edit_height"
+           android:isScrollContainer="true"
+           android:layout_marginTop="8dp"
+           android:id="@+id/h_search_box"
+           android:background="@drawable/edit_background"
+           android:layout_marginHorizontal="16dp"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent">
+           
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="0dp"
+               android:id="@+id/h_search_icon"
+               android:src="@drawable/search_96px"
+               android:adjustViewBounds="true"
+               android:padding="4dp"
+               app:tint="@color/colorAccent"
+               android:layout_marginStart="4dp"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintBottom_toBottomOf="parent"
+               tools:ignore="ContentDescription" />
+           
+           <EditText
+               android:layout_width="0dp"
+               android:layout_height="0dp"
+               android:background="@android:color/transparent"
+               android:hint="@string/search_hint"
+               android:paddingHorizontal="8dp"
+               android:textSize="18sp"
+               android:textColorHint="@color/colorDarkGray"
+               android:textColor="@color/black"
+               android:maxLines="1"
+               android:maxLength="20"
+               android:inputType="textAutoComplete"
+               android:focusedByDefault="false"
+               android:selectAllOnFocus="true"
+               app:layout_constraintStart_toEndOf="@id/h_search_icon"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintBottom_toBottomOf="parent"
+               tools:ignore="UnusedAttribute" />
+           
+       </androidx.constraintlayout.widget.ConstraintLayout>
+       
+       <androidx.recyclerview.widget.RecyclerView
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="16dp"
+           android:id="@+id/h_friends_recycler"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/h_search_box"/>
+       
+       <androidx.recyclerview.widget.RecyclerView
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="16dp"
+           android:id="@+id/h_chats_recycler"
+           android:nestedScrollingEnabled="false"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/h_friends_recycler"/>
+       
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

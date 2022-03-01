@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:width="@dimen/profile_size" android:height="@dimen/profile_size">
+        <shape android:shape="oval">
+            <solid android:color="@color/colorGray"  />
+        </shape>
+    </item>
+    
+    <item android:gravity="center">
+        <bitmap android:src="@drawable/user_96px"
+            android:gravity="center"
+            android:tint="@color/colorPrimary"
+            android:antialias="true" />
+    </item>
+</layer-list>

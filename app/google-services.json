@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1013102459625",
+    "firebase_url": "https://chat-c5881-default-rtdb.firebaseio.com",
+    "project_id": "chat-c5881",
+    "storage_bucket": "chat-c5881.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013102459625:android:6be0eaa653e979ce550e78",
+        "android_client_info": {
+          "package_name": "com.brimbay.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013102459625-49rntu8iudqe26neggoqiif7haqifqjc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnotw38599wkiHcxlPPVJLXgMZPnP49qA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1013102459625-49rntu8iudqe26neggoqiif7haqifqjc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
