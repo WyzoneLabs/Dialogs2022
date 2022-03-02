@@ -3,7 +3,11 @@ package models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import utils.Util;
 
@@ -11,11 +15,14 @@ import utils.Util;
  * Created by Kevine James on 2/22/2022.
  * Copyright (c) 2022 Brimbay. All rights reserved.
  */
+@Keep
+@Entity(tableName = "friend")
 public class Friend extends User implements Parcelable {
 	public String room_id;
 	
 	public Friend() {
 		super();
+		this.room_id = "";
 	}
 	
 	@Ignore

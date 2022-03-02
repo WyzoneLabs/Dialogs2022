@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
@@ -26,6 +27,11 @@ public class Message implements Parcelable {
 	
 	public Message() {
 		id = "";
+	}
+	
+	@Ignore
+	public Chat getChat(String userId){
+		return new Chat(this.room_id, userId.equals(this.sender_id)?this.receiver_id:this.sender_id,this.message,this.timestamp);
 	}
 	
 	protected Message(Parcel in) {

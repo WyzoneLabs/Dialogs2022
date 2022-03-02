@@ -1,10 +1,14 @@
 package adapters;
 
+import static utils.Util.getInitial;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +19,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import models.Friend;
@@ -29,6 +34,7 @@ public class FriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 	
 	private final Context context;
 	private List<Friend> mFriends;
+	private final int[] colors;
 	private OnFriendCallbackListener onFriendCallbackListener;
 	
 	public interface OnFriendCallbackListener{
@@ -39,6 +45,7 @@ public class FriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 	public FriendAdapter(Context context) {
 		this.context = context;
 		mFriends = new ArrayList<>();
+		colors = context.getResources().getIntArray(R.array.color_initial_bgs);
 	}
 	
 	//region Getters & Setters
@@ -98,40 +105,56 @@ public class FriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 	
 	@Override
 	public int getItemCount() {
-		return mFriends.size() + 1;
+		return mFriends.size();
 	}
 	
 	@Override
 	public int getItemViewType(int position) {
 		if (mFriends != null) {
-			if (position == 0) {
-				return VIEW_ADD_FRIEND;
-			} else {
+//			if (position == 0) {
+//				return VIEW_ADD_FRIEND;
+//			} else {
 				return VIEW_FRIEND;
-			}
+//			}
 		}
 		return super.getItemViewType(position);
 	}
 	
 	class FriendViewHolder extends RecyclerView.ViewHolder{
-		CircleImageView _avatar;
-		TextView _name;
-		View _view;
+		ImageView _avatar;
+		TextView _name,_initial;
+		View _view,_avatar_cnt,_padding;
 		public FriendViewHolder(@NonNull View itemView) {
 			super(itemView);
 			_view = itemView.findViewById(R.id.parent);
 			_avatar = itemView.findViewById(R.id.avatar);
+			_padding = itemView.findViewById(R.id.padding);
+			_avatar_cnt = itemView.findViewById(R.id.avatar_cnt);
+			_initial = itemView.findViewById(R.id.avatar_initial);
 			_name = itemView.findViewById(R.id.name);
 		}
 		
 		void bind(Friend friend){
-			Glide.with(context)
-					.load(friend.avatar)
-					.error(R.drawable.user)
-					.into(_avatar);
 			_name.setText(friend.first_name);
+			_padding.setVisibility(getBindingAdapterPosition() == 0?View.VISIBLE:View.GONE);
+			Random random = new Random();
+			if (friend.avatar == null){
+				_initial.setText(getInitial(friend));
+				_initial.setBackgroundTintList(ColorStateList.valueOf(colors[random.nextInt(colors.length)]));
+				_initial.setVisibility(View.VISIBLE);
+				_avatar_cnt.setVisibility(View.GONE);
+			}else{
+				Glide.with(context)
+						.load(friend.avatar)
+						.error(R.drawable.user)
+						.into(_avatar);
+				
+				_avatar_cnt.setVisibility(View.VISIBLE);
+				_initial.setVisibility(View.GONE);
+			}
+			
 			_view.setOnClickListener(view -> {
-				if (onFriendCallbackListener != null)onFriendCallbackListener.onAddFriendClickListener();
+				if (onFriendCallbackListener != null)onFriendCallbackListener.onFriendClickListener(friend,getBindingAdapterPosition());
 			});
 		}
 	}

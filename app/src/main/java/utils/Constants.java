@@ -9,4 +9,5 @@ public class Constants {
 	public static final String FB_MESSAGES_DB = "messages";
 	public static final String FB_CHAT_SESSION_DB = "chat_sessions";
 	public static final String FB_CHAT_REQUEST_BD = "chat_requests";
+	public static final String FB_USER_BD = "users";
 }

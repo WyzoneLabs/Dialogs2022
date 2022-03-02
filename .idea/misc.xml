@@ -7,6 +7,7 @@
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/drawable/background_pin_filled.xml" value="0.1755" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/drawable/background_pin_focused.xml" value="0.1605" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/drawable/background_pin_normal.xml" value="0.1605" />
+        <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/drawable/dash_round_background.xml" value="0.153" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/drawable/edit_background.xml" value="0.262" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/drawable/initial_background.xml" value="0.1605" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/drawable/iswitch_background.xml" value="0.227" />
@@ -27,12 +28,15 @@
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/activity_start.xml" value="0.25677083333333334" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/activity_video.xml" value="0.25677083333333334" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/content_chat.xml" value="0.3375722543352601" />
-        <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/fragment_home.xml" value="0.4" />
+        <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/fragment_chat.xml" value="0.15208333333333332" />
+        <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/fragment_home.xml" value="0.536" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/fragment_joinchannel_video.xml" value="0.25677083333333334" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/fragment_message.xml" value="0.25677083333333334" />
+        <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/fragment_register.xml" value="0.4" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/view_add_friend.xml" value="0.25677083333333334" />
-        <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/view_chat.xml" value="0.8" />
-        <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/view_friend.xml" value="0.72" />
+        <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/view_chat.xml" value="0.6168958742632613" />
+        <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/view_friend.xml" value="0.6" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/view_i_switch.xml" value="1.2" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/view_local_video.xml" value="0.25677083333333334" />
         <entry key="..\:/StudioProjects/2022/Chat/app/src/main/res/layout/view_message_admin.xml" value="0.25677083333333334" />

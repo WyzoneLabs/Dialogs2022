@@ -11,7 +11,7 @@
         android:id="@+id/ct_guest_video_box"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_editor_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -102,6 +102,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:isScrollContainer="true"
+        android:paddingHorizontal="8dp"
         app:layout_constraintBottom_toTopOf="@id/text_editor_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +121,6 @@
         android:layout_height="0dp"
         android:isScrollContainer="true"
         android:visibility="gone"
-        android:background="@drawable/video_messages_background"
         app:layout_constraintBottom_toTopOf="@id/text_editor_box"
         app:layout_constraintEnd_toEndOf="@id/guideline6"
         app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +130,7 @@
             android:id="@+id/messages_recycler_video"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
     
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -218,12 +218,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
+        app:layout_constraintGuide_percent="0.55" />
     
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.72" />
+        app:layout_constraintGuide_percent="0.80" />
 </androidx.constraintlayout.widget.ConstraintLayout>

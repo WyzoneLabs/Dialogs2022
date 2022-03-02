@@ -11,6 +11,9 @@
     <uses-permission-sdk-23 android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission-sdk-23 android:name="android.permission.BLUETOOTH" />
     <uses-permission-sdk-23 android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission-sdk-23 android:name="android.permission.READ_CONTACTS" />
+    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     
     <application
         android:allowBackup="true"

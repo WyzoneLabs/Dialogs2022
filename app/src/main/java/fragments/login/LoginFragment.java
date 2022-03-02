@@ -32,9 +32,19 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hbb20.CountryCodePicker;
 
 import java.util.concurrent.TimeUnit;
+
+import database.AppDatabase;
+import models.User;
+import utils.AppExecutors;
+import utils.Constants;
 
 public class LoginFragment extends Fragment {
 	private Context selfRef;
@@ -43,7 +53,7 @@ public class LoginFragment extends Fragment {
 	private static final String KEY_VERIFY_IN_PROGRESS = "com.dialog.key.VerifyProgress";
 	
 	private static final int STATE_INITIALIZED = 1;
-	private static final int STATE_CODE_SENT = 2;
+	public static final int STATE_CODE_SENT = 2;
 	private static final int STATE_VERIFY_FAILED = 3;
 	private static final int STATE_VERIFY_SUCCESS = 4;
 	private static final int STATE_SIGNIN_FAILED = 5;
@@ -211,10 +221,8 @@ public class LoginFragment extends Fragment {
 				Log.d( TAG , "signInWithCredential:success ");
 				
 				FirebaseUser user = task.getResult().getUser();
+				validateUser(user.getUid());
 //				updateUI( STATE_SIGNIN_SUCCESS , user);
-				Toast.makeText(selfRef, "Successfully logged in", Toast.LENGTH_SHORT).show();
-				startActivity(new Intent(selfRef, StartActivity.class));
-				requireActivity().finishAffinity();
 			} else {
 				// Sign in failed, display a message and update the UI
 				Log.w( TAG , "signInWithCredential:failure ", task.getException());
@@ -227,6 +235,44 @@ public class LoginFragment extends Fragment {
 				binding.lgCodeBox.setVisibility(View.VISIBLE);
 				binding.lgCodeSubTitle.setText(getString(R.string.enter_code_sent_to_phone_number,getPhoneNumber()));
 //				updateUI( STATE_SIGNIN_FAILED );
+			}
+		});
+	}
+	
+	private void validateUser(String id){
+		FirebaseDatabase.getInstance().getReference(Constants.FB_USER_BD).child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot snapshot) {
+				waitDialog.doDismiss();
+				if (snapshot.exists()){
+					User user = snapshot.getValue(User.class);
+					if (user != null){
+						AppExecutors.getInstance().diskIO().execute(() -> AppDatabase.newInstance(selfRef).userDao().insert(user));
+						Toast.makeText(selfRef, "Successfully logged in", Toast.LENGTH_SHORT).show();
+						startActivity(new Intent(selfRef, StartActivity.class));
+						requireActivity().finishAffinity();
+						return;
+					}
+				}
+				if (mOnLoginInteraction != null){
+					mOnLoginInteraction.onStartRegistration();
+				}
+//
+//
+//				else {
+//					User user = new User();
+//					user.id = id;
+//					user.first_name = "Kevin";
+//					user.last_name = "James";
+//					snapshot.getRef().setValue(user).addOnSuccessListener(unused -> Log.d(TAG,"Success adding"));
+//				}
+			}
+			
+			@Override
+			public void onCancelled(@NonNull DatabaseError error) {
+				mAuth.signOut();
+				startActivity(new Intent(selfRef, StartActivity.class));
+				requireActivity().finishAffinity();
 			}
 		});
 	}
@@ -373,6 +419,7 @@ public class LoginFragment extends Fragment {
 	
 	public interface OnLoginInteraction{
 		void onLoginPageChanged(int page);
+		void onStartRegistration();
 	}
 	
 	public OnLoginInteraction getOnLoginInteraction() {

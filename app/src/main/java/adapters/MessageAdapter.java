@@ -247,13 +247,11 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 	class FriendViewHolder extends RecyclerView.ViewHolder{
 		TextView _text;
 		TextView _time;
-		CircleImageView _avatar;
 		View _padding;
 		public FriendViewHolder(@NonNull View itemView) {
 			super(itemView);
 			_text = itemView.findViewById(R.id.text);
 			_time = itemView.findViewById(R.id.time);
-			_avatar = itemView.findViewById(R.id.avatar);
 			_padding = itemView.findViewById(R.id.padding);
 		}
 		
@@ -266,11 +264,9 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 //					.into(_avata);
 			if (shouldBubbleAllRound(getBindingAdapterPosition())){
 				_text.setBackgroundResource(R.drawable.message_background_friend_round);
-				_avatar.setVisibility(View.INVISIBLE);
 				_time.setVisibility(View.GONE);
 			}else{
 				_text.setBackgroundResource(R.drawable.message_background_friend_default);
-				_avatar.setVisibility(View.VISIBLE);
 				_time.setVisibility(View.VISIBLE);
 			}
 			_padding.setVisibility(getItemCount() == getBindingAdapterPosition() + 1?View.VISIBLE:View.GONE);

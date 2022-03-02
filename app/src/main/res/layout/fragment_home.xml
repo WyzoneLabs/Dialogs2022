@@ -12,7 +12,7 @@
        
        <androidx.constraintlayout.widget.ConstraintLayout
            android:layout_width="0dp"
-           android:layout_height="@dimen/edit_height"
+           android:layout_height="@dimen/small_edit_height"
            android:isScrollContainer="true"
            android:layout_marginTop="8dp"
            android:id="@+id/h_search_box"
@@ -28,9 +28,8 @@
                android:id="@+id/h_search_icon"
                android:src="@drawable/search_96px"
                android:adjustViewBounds="true"
-               android:padding="4dp"
-               app:tint="@color/colorAccent"
-               android:layout_marginStart="4dp"
+               android:padding="6dp"
+               app:tint="@color/colorDarkGray"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toTopOf="parent"
                app:layout_constraintBottom_toBottomOf="parent"
@@ -40,11 +39,12 @@
                android:layout_width="0dp"
                android:layout_height="0dp"
                android:background="@android:color/transparent"
-               android:hint="@string/search_hint"
-               android:paddingHorizontal="8dp"
-               android:textSize="18sp"
+               android:hint="@string/search_friends_hint"
+               android:paddingEnd="8dp"
+               android:paddingStart="2dp"
+               android:textSize="14sp"
                android:textColorHint="@color/colorDarkGray"
-               android:textColor="@color/black"
+               android:textColor="@color/colorPrimaryDark"
                android:maxLines="1"
                android:maxLength="20"
                android:inputType="textAutoComplete"
@@ -54,7 +54,8 @@
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintTop_toTopOf="parent"
                app:layout_constraintBottom_toBottomOf="parent"
-               tools:ignore="UnusedAttribute" />
+               tools:ignore="UnusedAttribute"
+               android:autofillHints="@null" />
            
        </androidx.constraintlayout.widget.ConstraintLayout>
        
@@ -66,16 +67,40 @@
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintTop_toBottomOf="@id/h_search_box"/>
-       
-       <androidx.recyclerview.widget.RecyclerView
+    
+       <com.google.android.material.tabs.TabLayout
+           android:id="@+id/h_tab_layout"
            android:layout_width="0dp"
            android:layout_height="wrap_content"
-           android:layout_marginTop="16dp"
-           android:id="@+id/h_chats_recycler"
-           android:nestedScrollingEnabled="false"
+           android:layout_gravity="bottom"
+           android:layout_marginTop="24dp"
+           android:layout_marginHorizontal="16dp"
+           app:layout_collapseMode="pin"
+           app:tabGravity="fill"
+           app:tabIndicatorAnimationMode="elastic"
+           app:tabIndicatorColor="@color/colorPrimaryDark"
+           app:tabIndicatorFullWidth="true"
+           app:tabIndicatorGravity="bottom"
+           app:tabIndicatorHeight="2.8dp"
+           app:tabPadding="0dp"
+           android:padding="0dp"
+           app:tabInlineLabel="true"
+           app:tabMode="fixed"
+           app:tabTextAppearance="@style/Theme.Dialog.TabText"
+           app:tabTextColor="@color/black"
+           tools:ignore="SpeakableTextPresentCheck"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@id/h_friends_recycler"/>
+    
+       <androidx.viewpager2.widget.ViewPager2
+           android:id="@+id/h_pager"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/h_friends_recycler"/>
+           app:layout_constraintTop_toBottomOf="@id/h_tab_layout"/>
        
    </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,54 +5,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="@dimen/edit_height"
-        android:layout_height="@dimen/edit_height"
-        android:id="@+id/avatar"
-        android:src="@drawable/user"
-        android:padding="4dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Theme.Dialog.FontBold"
         android:id="@+id/title"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/black"
         tools:text="@string/app_name"
         android:textSize="26sp"
+        android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    
+    <FrameLayout
+        android:id="@+id/avatar_box"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    
-    
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/edit_height"
-        android:contentDescription="@string/more"
-        android:id="@+id/updates_action"
-        android:src="@drawable/notification_96px"
-        android:adjustViewBounds="true"
-        android:padding="8dp"
-        app:layout_constraintEnd_toStartOf="@id/more_action"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/edit_height"
-        android:contentDescription="@string/more"
-        android:id="@+id/more_action"
-        android:src="@drawable/menu_vertical_96px"
-        android:adjustViewBounds="true"
-        android:padding="8dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+        
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="@dimen/default_image_corner_radius"
+            app:cardBackgroundColor="@color/colorGrayLight"
+            app:cardElevation="0dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="false"
+            android:visibility="gone"
+            android:id="@+id/avatar_cnt">
+            
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:src="@tools:sample/avatars"
+                android:contentDescription="@string/avatar" />
+        
+        </androidx.cardview.widget.CardView>
+        
+        <TextView
+            android:id="@+id/avatar_initial"
+            style="@style/Theme.Dialog.FontBold"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/initial_background"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:text="KL" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,14 @@
 package adapters;
 
+import static utils.Util.getInitial;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,9 +19,13 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import database.AppDatabase;
 import de.hdodenhof.circleimageview.CircleImageView;
 import models.Chat;
+import models.Friend;
+import utils.AppExecutors;
 import utils.DateUtils;
 
 /**
@@ -26,6 +35,7 @@ import utils.DateUtils;
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 	private final Context context;
 	private List<Chat> mChats;
+	private final int[] colors;
 	private OnChatCallbackListener onChatCallbackListener;
 	
 	public interface OnChatCallbackListener{
@@ -35,6 +45,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 	public ChatAdapter(Context context) {
 		this.context = context;
 		mChats = new ArrayList<>();
+		colors = context.getResources().getIntArray(R.array.color_initial_bgs);
 	}
 	
 	//region Getters & Setters
@@ -50,8 +61,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 		return mChats;
 	}
 	
+	@SuppressLint("NotifyDataSetChanged")
 	public void setChats(List<Chat> mChats) {
 		this.mChats = mChats;
+		notifyDataSetChanged();
 	}
 	
 	//endregion
@@ -66,22 +79,43 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		Chat chat = mChats.get(position);
-		holder._name.setText(context.getString(R.string.friend_name, chat.first_name, chat.last_name));
-		holder._time.setText(DateUtils.formatPassedTimeAndDate(context,chat.timestamp));
-		holder._text.setText(chat.text);
-		Glide.with(context)
-				.load(chat.avatar)
-				.error(R.drawable.user)
-				.into(holder._avatar);
-		
-		//TODO:Only for test
-		holder._unread_box.setVisibility(View.VISIBLE);
-		holder._online.setVisibility(View.VISIBLE);
-		holder._unread.setText("2");
-		
-		holder._parent.setOnClickListener(view -> {
-			if (onChatCallbackListener != null)onChatCallbackListener.onChatClick(chat,position);
+		AppExecutors.getInstance().diskIO().execute(() -> {
+			Friend friend = AppDatabase.newInstance(context).friendDao().findByID(chat.friend_id);
+			AppExecutors.getInstance().mainThread().execute(()->{
+				if (friend != null){
+					chat.friend = friend;
+					holder._name.setText(context.getString(R.string.friend_name, friend.first_name, friend.last_name));
+					holder._time.setText(DateUtils.formatPassedTimeAndDate(context,chat.timestamp));
+					holder._text.setText(chat.text);
+					
+					Random random = new Random();
+					if (friend.avatar == null){
+						holder._initial.setText(getInitial(friend));
+						holder._initial.setBackgroundTintList(ColorStateList.valueOf(colors[random.nextInt(colors.length)]));
+						holder._initial.setVisibility(View.VISIBLE);
+						holder._avatar_cnt.setVisibility(View.GONE);
+					}else{
+						Glide.with(context)
+								.load(friend.avatar)
+								.error(R.drawable.user)
+								.into(holder._avatar);
+						
+						holder._avatar_cnt.setVisibility(View.VISIBLE);
+						holder._initial.setVisibility(View.GONE);
+					}
+					
+					//TODO:Only for test
+					holder._unread_box.setVisibility(View.VISIBLE);
+					holder._online.setVisibility(View.VISIBLE);
+					holder._unread.setText("2");
+					
+					holder._parent.setOnClickListener(view -> {
+						if (onChatCallbackListener != null)onChatCallbackListener.onChatClick(chat,position);
+					});
+				}
+			});
 		});
+		
 	}
 	
 	@Override
@@ -90,14 +124,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 	}
 	
 	public static class ViewHolder extends RecyclerView.ViewHolder {
-		CircleImageView _avatar;
-		TextView _name, _time,_unread,_text;
-		View _parent,_unread_box,_online;
+		ImageView _avatar;
+		TextView _name,_initial, _time,_unread,_text;
+		View _parent,_unread_box,_online,_avatar_cnt;
 		public ViewHolder(@NonNull View itemView) {
 			super(itemView);
 			_avatar = itemView.findViewById(R.id.avatar);
+			_avatar_cnt = itemView.findViewById(R.id.avatar_cnt);
 			_name = itemView.findViewById(R.id.name);
 			_text = itemView.findViewById(R.id.text);
+			_initial = itemView.findViewById(R.id.avatar_initial);
 			_time = itemView.findViewById(R.id.time);
 			_unread = itemView.findViewById(R.id.unread_count);
 			_parent = itemView.findViewById(R.id.parent);

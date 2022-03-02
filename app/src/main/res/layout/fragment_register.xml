@@ -4,19 +4,186 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
-
-    <TextView
-        android:id="@+id/text_notifications"
-        android:layout_width="match_parent"
+    tools:context="fragments.register.RegisterFragment">
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rg_container"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_marginBottom="64dp"
+        android:isScrollContainer="true"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@id/guideline8"
+        app:layout_constraintStart_toStartOf="@id/guideline7"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rg_avatar_box"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/add_profile"
+                android:layout_width="@dimen/profile_size"
+                android:layout_height="@dimen/profile_size"
+                android:background="@drawable/dash_round_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+        
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/add_camera_96px"
+                    android:contentDescription="@string/add_a_profile_photo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorAccent" />
+    
+            </androidx.constraintlayout.widget.ConstraintLayout>
+    
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/profile_size"
+                android:layout_height="@dimen/profile_size"
+                android:id="@+id/avatar"
+                tools:src="@tools:sample/avatars"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+    
+            <TextView
+                android:id="@+id/add_profile_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_a_profile_photo"
+                android:elegantTextHeight="true"
+                android:textColor="@color/colorAccent"
+                style="@style/Theme.Dialog.FontBold"
+                android:textSize="16sp"
+                android:paddingVertical="8dp"
+                app:layout_constraintEnd_toEndOf="@id/add_profile"
+                app:layout_constraintStart_toStartOf="@id/add_profile"
+                app:layout_constraintTop_toBottomOf="@id/add_profile" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:boxBackgroundColor="@color/colorGrayLight"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeWidth="0dp"
+            app:boxCornerRadiusBottomEnd="@dimen/default_corner_radius"
+            app:boxCornerRadiusBottomStart="@dimen/default_corner_radius"
+            app:boxCornerRadiusTopEnd="@dimen/default_corner_radius"
+            app:boxCornerRadiusTopStart="@dimen/default_corner_radius"
+            app:placeholderText="@string/first_name"
+            android:hint="@string/first_name"
+            app:hintTextColor="@color/colorGray"
+            android:id="@+id/rg_first_name__box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rg_avatar_box">
+            
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rg_first_name"
+                android:focusedByDefault="false"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="textPersonName"
+                android:imeOptions="actionNext"
+                android:imeActionLabel="@string/next"
+                android:maxLines="1"
+                android:maxLength="60"
+                android:paddingVertical="13dp"
+                android:textSize="18sp"
+                tools:targetApi="o" />
+            
+        </com.google.android.material.textfield.TextInputLayout>
+    
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:boxBackgroundColor="@color/colorGrayLight"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeWidth="0dp"
+            app:boxCornerRadiusBottomEnd="@dimen/default_corner_radius"
+            app:boxCornerRadiusBottomStart="@dimen/default_corner_radius"
+            app:boxCornerRadiusTopEnd="@dimen/default_corner_radius"
+            app:boxCornerRadiusTopStart="@dimen/default_corner_radius"
+            app:placeholderText="@string/last_name"
+            android:hint="@string/last_name"
+            app:hintTextColor="@color/colorGray"
+            android:id="@+id/rg_last_name__box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rg_first_name__box">
+        
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rg_last_name"
+                android:focusedByDefault="false"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="textPersonName"
+                android:imeOptions="actionNext"
+                android:imeActionLabel="@string/next"
+                android:maxLines="1"
+                android:maxLength="60"
+                android:paddingVertical="13dp"
+                android:textSize="18sp"
+                tools:targetApi="o" />
+    
+        </com.google.android.material.textfield.TextInputLayout>
+        
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/rg_next_btn"
+        style="@style/Theme.Dialog.FontBold"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/edit_height"
+        android:background="@drawable/edit_background"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline9"
+        app:layout_constraintEnd_toEndOf="@id/guideline8"
+        app:layout_constraintStart_toStartOf="@id/guideline7" />
+    
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.08" />
+    
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.92" />
+    
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
 </androidx.constraintlayout.widget.ConstraintLayout>

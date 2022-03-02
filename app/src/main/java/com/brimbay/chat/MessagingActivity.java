@@ -64,6 +64,7 @@ import ui.iSwitch;
 import utils.AppExecutors;
 import utils.Constants;
 import utils.GlobalSettings;
+import utils.Util;
 
 public class MessagingActivity extends AppCompatActivity {
 	private MessagingActivity selfRef;
@@ -73,7 +74,6 @@ public class MessagingActivity extends AppCompatActivity {
 	
 	public static final String INTENT_CHAT_ACTION = "com.dialog.chat.intent.Action";
 	public static final String INTENT_CHAT_FRIEND_DATA = "com.dialog.chat.intent.data.Friend";
-	public static final String INTENT_CHAT_REQUEST_DATA = "com.dialog.chat.intent.data.ChatRequest";
 	private static final String KEY_FRIEND = "com.dialog.key.Friend";
 	
 	//region Views
@@ -84,7 +84,8 @@ public class MessagingActivity extends AppCompatActivity {
 	
 	//region Vars
 	private ActivityMessagingBinding binding;
-	private Friend mFriend;
+	private Friend mFriend = null;
+	private String mFriendId;
 	private MessageAdapter mAdapter;
 	private LinearLayoutManager mLinearLayoutManager,mVideoLinearLayoutManager;
 	private AppDatabase mAppDatabase;
@@ -145,6 +146,9 @@ public class MessagingActivity extends AppCompatActivity {
 		selfRef = this;
 		getWindow().addFlags( WindowManager. LayoutParams.FLAG_KEEP_SCREEN_ON );
 		
+		//Firebase
+		mAuth = FirebaseAuth.getInstance();
+		mAppDatabase = AppDatabase.newInstance(selfRef);
 		handleData(savedInstanceState);
 		
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -160,28 +164,8 @@ public class MessagingActivity extends AppCompatActivity {
 					Manifest.permission.BLUETOOTH
 			};
 		}
-		mAppDatabase = AppDatabase.newInstance(selfRef);
 		
-		if (mFriend == null || mFriend.id.equals("")){
-//			Toast.makeText(selfRef, getString(R.string.sorry_something_went_wrong_please_try_again), Toast.LENGTH_SHORT).show();
-//			onBackPressed();
-			//TODO::Test data
-			mFriend = new Friend();
-			mFriend.first_name = "Test";
-			mFriend.last_name = "One";
-			mFriend.phone = "+6736767840033";
-		}
-		
-		//Firebase
-		mAuth = FirebaseAuth.getInstance();
-		try {
-			mFriend.id = Objects.equals(mAuth.getUid(), "wCiuoykn8VVAl9TPrzSj3uu2kKk1") ?"qkNDAviF2QV1AIralt6hpyTGVac2":"wCiuoykn8VVAl9TPrzSj3uu2kKk1";
-			mFriend.room_id = mFriend.getRoomId(mAuth.getUid());
-		}catch (NullPointerException e){
-			e.printStackTrace();
-		}
 		mChatDBReference = FirebaseDatabase.getInstance().getReference(Constants.FB_MESSAGES_DB).child(mFriend.room_id);
-		
 		launcherResult = createPermissionResultLauncher();
 		
 		binding = ActivityMessagingBinding.inflate(getLayoutInflater());
@@ -238,7 +222,7 @@ public class MessagingActivity extends AppCompatActivity {
 				leaveChannel();
 			}
 		});
-
+		
 		handleFriendData(mFriend);
 	}
 	
@@ -266,10 +250,27 @@ public class MessagingActivity extends AppCompatActivity {
 	private void handleData(Bundle bundle){
 		Intent intent = getIntent();
 		if (intent != null && intent.getAction() != null && Objects.equals(intent.getAction(), INTENT_CHAT_ACTION)){
-			mFriend = intent.getParcelableExtra(INTENT_CHAT_FRIEND_DATA);
+			mFriendId = intent.getStringExtra(INTENT_CHAT_FRIEND_DATA);
 		}else if (bundle != null){
-			mFriend = bundle.getParcelable(KEY_FRIEND);
+			mFriendId = bundle.getString(KEY_FRIEND);
 		}
+		
+		AppExecutors.getInstance().diskIO().execute(() -> {
+			if (mFriendId != null){
+				Friend friend = mAppDatabase.friendDao().findByID(mFriendId);
+				runOnUiThread(()->{
+					if (friend != null && mAuth.getUid() != null){
+						mFriend = friend;
+						mFriend.room_id = Util.getChatRoomId(mAuth.getUid(),mFriend.id);
+						return;
+					}
+				});
+			}
+			runOnUiThread(() -> {
+				Toast.makeText(selfRef, getString(R.string.sorry_something_went_wrong_please_try_again), Toast.LENGTH_SHORT).show();
+				finish();
+			});
+		});
 	}
 	
 	private void handleMessages(Friend friend){
@@ -315,7 +316,10 @@ public class MessagingActivity extends AppCompatActivity {
 			mVideoLinearLayoutManager.scrollToPosition(mAdapter.getItemCount() - 1);
 			
 			mChatDBReference.child(key).setValue(message).addOnSuccessListener(unused -> {
-				AppExecutors.getInstance().diskIO().execute(() -> mAppDatabase.messageDao().insert(message));
+				AppExecutors.getInstance().diskIO().execute(() -> {
+					mAppDatabase.messageDao().insert(message);
+					mAppDatabase.chatDao().insert(message.getChat(mAuth.getUid()));
+				});
 			}).addOnCanceledListener(()-> Toast.makeText(selfRef, getString(R.string.sorry_something_went_wrong_please_try_again), Toast.LENGTH_SHORT).show());
 		}
 	}
@@ -331,6 +335,7 @@ public class MessagingActivity extends AppCompatActivity {
 					mVideoLinearLayoutManager.scrollToPosition(mAdapter.getItemCount() - 1);
 					AppExecutors.getInstance().diskIO().execute(() -> {
 						mAppDatabase.messageDao().insert(message);
+						mAppDatabase.chatDao().insert(message.getChat(Objects.requireNonNull(mAuth.getUid())));
 						snapshot.getRef().removeValue();
 					});
 				}
@@ -363,10 +368,12 @@ public class MessagingActivity extends AppCompatActivity {
 			if (mAdapter != null)mAdapter.setViewLayout(MessageAdapter.VIDEO_LAYOUT);
 			binding.cpLargeRecyclerBox.setVisibility(View.GONE);
 			binding.cpVideoRecyclerBox.setVisibility(View.VISIBLE);
+			binding.cpUsername.setTextColor(ResourcesCompat.getColor(getResources(),R.color.white, null));
 		}else{
 			if (mAdapter != null)mAdapter.setViewLayout(MessageAdapter.TEXT_LAYOUT);
 			binding.cpLargeRecyclerBox.setVisibility(View.VISIBLE);
 			binding.cpVideoRecyclerBox.setVisibility(View.GONE);
+			binding.cpUsername.setTextColor(ResourcesCompat.getColor(getResources(),R.color.colorPrimaryDark, null));
 		}
 	}
 	
@@ -380,7 +387,7 @@ public class MessagingActivity extends AppCompatActivity {
 				if (!x.getValue()) granted = false;
 			}
 			if (granted) {
-				if (mAuth != null && mAuth.getUid() != null)initAgoraEngineAndJoinChannel(mAuth.getUid(),mFriend.getRoomId(mAuth.getUid()));
+				if (mAuth != null && mAuth.getUid() != null)initAgoraEngineAndJoinChannel(mAuth.getUid(),mFriend.room_id);
 			}else {
 				MessageDialog messageDialog = new MessageDialog(
 						getString(R.string.allow_permissions),
@@ -547,7 +554,7 @@ public class MessagingActivity extends AppCompatActivity {
 	
 	@Override
 	protected void onSaveInstanceState(@NonNull Bundle outState) {
-		if (mFriend != null)outState.putParcelable(KEY_FRIEND,mFriend);
+		if (mFriendId != null)outState.putString(KEY_FRIEND,mFriendId);
 		super.onSaveInstanceState(outState);
 	}
 	

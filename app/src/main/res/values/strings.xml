@@ -40,5 +40,20 @@
     <string name="allow_permissions">Allow permissions</string>
     <string name="permissions_request_info">Please enable all the requested permissions to use all features of the app.</string>
     <string name="allow">Allow</string>
+    <string name="add_a_profile_photo">Add profile photo</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="would_you_like_to_cancel">Would you like to cancel?</string>
+    <string name="cancel">Cancel</string>
+    <string name="this_field_is_required">This field is required</string>
+    <string name="not_valid_last_name">Invalid last name</string>
+    <string name="not_valid_first_name">Invalid first name</string>
+    <string name="register">Register</string>
+    <string name="chats">Chats</string>
+    <string name="chat_requests">Chat Requests</string>
+    <string name="friends">Friends</string>
+    <string name="requests">Requests</string>
+    <string name="search_friends_hint">Search friends</string>
+    <string name="avatar">Avatar</string>
 
 </resources>

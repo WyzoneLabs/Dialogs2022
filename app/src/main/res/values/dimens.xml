@@ -4,7 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="default_corner_radius">4dp</dimen>
     <dimen name="edit_height">42dp</dimen>
-    <dimen name="friend_avatar_height">64dp</dimen>
+    <dimen name="friend_avatar_height">56dp</dimen>
     
     <dimen name="icon_top_margin">24dp</dimen>
     <dimen name="icon_bottom_margin">24dp</dimen>
@@ -14,4 +14,7 @@
     <dimen name="button_horizontal_margin">8dp</dimen>
     <dimen name="chat_bubble_corner_radius">12dp</dimen>
     <dimen name="profile_size">96dp</dimen>
+    <dimen name="chat_avatar_height">48dp</dimen>
+    <dimen name="small_edit_height">36dp</dimen>
+    <dimen name="default_image_corner_radius">12dp</dimen>
 </resources>

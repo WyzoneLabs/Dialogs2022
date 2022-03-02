@@ -12,6 +12,7 @@ import android.os.Bundle;
 import com.brimbay.chat.databinding.ActivityAccountBinding;
 
 import fragments.login.LoginFragment;
+import fragments.register.RegisterFragment;
 
 public class AccountActivity extends AppCompatActivity {
     private AccountActivity selfRef;
@@ -30,9 +31,19 @@ public class AccountActivity extends AppCompatActivity {
         mFragmentManager = getSupportFragmentManager();
     
         LoginFragment loginFragment = LoginFragment.newInstance();
-        loginFragment.setOnLoginInteraction(page -> {
-            codeSent = true;
-            binding.toolbarBox.title.setText(codeSent?getString(R.string.code_verification):getString(R.string.phone_number));
+        loginFragment.setOnLoginInteraction(new LoginFragment.OnLoginInteraction() {
+            @Override
+            public void onLoginPageChanged(int page) {
+                codeSent = true;
+                binding.toolbarBox.title.setText(page == LoginFragment.STATE_CODE_SENT?getString(R.string.code_verification):getString(R.string.phone_number));
+            }
+    
+            @Override
+            public void onStartRegistration() {
+                binding.toolbarBox.title.setText(getString(R.string.register));
+                RegisterFragment registerFragment = RegisterFragment.newInstance();
+                addFragment(registerFragment,"register");
+            }
         });
         addFragment(loginFragment,null);
     }

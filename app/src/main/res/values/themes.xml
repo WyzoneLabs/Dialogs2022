@@ -34,8 +34,15 @@
     <style name="Theme.Dialog.FontBold">
         <item name="android:fontFamily">@font/circular_std_bold</item>
     </style>
+    
     <style name="Theme.Dialog.TitleText" parent="">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+    
+    <style name="Theme.Dialog.TabText">
+        <item name="android:fontFamily">@font/circular_std_bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">20sp</item>
     </style>
 </resources>
