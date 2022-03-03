@@ -17,4 +17,5 @@
     <dimen name="chat_avatar_height">48dp</dimen>
     <dimen name="small_edit_height">36dp</dimen>
     <dimen name="default_image_corner_radius">12dp</dimen>
+    <dimen name="small_image_corner_radius">8dp</dimen>
 </resources>

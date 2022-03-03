@@ -52,7 +52,7 @@
             style="@style/Theme.Dialog.FontBold"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/initial_background"
+            android:background="@drawable/small_initial_background"
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="16sp"

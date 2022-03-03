@@ -101,9 +101,7 @@ public class MainActivity extends AppCompatActivity {
 	private void initUI(){
 		_initial = binding.toolbarBox.avatarInitial;
 		_avatar = binding.toolbarBox.avatar;
-		binding.toolbarBox.avatar.setOnClickListener(view -> {
-			
-		});
+		binding.toolbarBox.avatarBox.setOnClickListener(view -> startActivity(new Intent(selfRef,SettingActivity.class)));
 		binding.toolbarBox.title.setText(getString(R.string.app_name));
 		setAvatar();
 	}

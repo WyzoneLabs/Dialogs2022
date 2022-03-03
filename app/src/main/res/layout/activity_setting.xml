@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity">
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/st_toolbar_box"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/edit_height"
+            android:contentDescription="@string/back"
+            android:id="@+id/back"
+            android:src="@drawable/left_96px"
+            android:adjustViewBounds="true"
+            android:padding="10dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Theme.Dialog.FontBold"
+            android:id="@+id/title"
+            android:textColor="@color/black"
+            android:text="@string/settings"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/st_toolbar_box"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+            
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/st_user_box"
+                android:padding="12dp"
+                android:background="@drawable/rounded_cardview_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+    
+                <FrameLayout
+                    android:id="@+id/avatar_box"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+        
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="@dimen/default_image_corner_radius"
+                        app:cardBackgroundColor="@color/colorGrayLight"
+                        app:cardElevation="0dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardUseCompatPadding="false"
+                        android:visibility="gone"
+                        android:id="@+id/avatar_cnt">
+            
+                        <ImageView
+                            android:id="@+id/avatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:src="@tools:sample/avatars"
+                            android:contentDescription="@string/avatar" />
+        
+                    </androidx.cardview.widget.CardView>
+        
+                    <TextView
+                        android:id="@+id/avatar_initial"
+                        style="@style/Theme.Dialog.FontBold"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/initial_background"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        tools:text="KL" />
+                </FrameLayout>
+                
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="4dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@id/st_edit_profile_link"
+                    app:layout_constraintStart_toEndOf="@id/avatar_box"
+                    app:layout_constraintTop_toTopOf="@id/avatar_box"
+                    app:layout_constraintBottom_toBottomOf="@id/avatar_box">
+    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/st_user_name"
+                        android:textColor="@color/colorPrimaryDark"
+                        style="@style/Theme.Dialog.FontMedium"
+                        android:textSize="18sp"
+                        tools:text="@tools:sample/full_names"/>
+    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/st_user_phone"
+                        android:textColor="@color/colorDarkGray"
+                        android:layout_marginTop="2dp"
+                        android:textSize="17sp"
+                        tools:text="@tools:sample/full_names"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit"
+                    android:id="@+id/st_edit_profile_link"
+                    style="@style/Theme.Dialog.FontMedium"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorAccent"
+                    android:paddingVertical="4dp"
+                    android:paddingHorizontal="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                
+            </androidx.constraintlayout.widget.ConstraintLayout>
+    
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/st_other_box"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_cardview_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/st_user_box">
+                
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/st_chat_box"
+                    android:paddingVertical="4dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+                    
+                    <FrameLayout
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:id="@+id/st_chat_icon_bx"
+                        android:background="@drawable/small_initial_background"
+                        android:backgroundTint="@android:color/holo_orange_dark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:adjustViewBounds="true"
+                            app:tint="@color/white"
+                            android:layout_gravity="center"
+                            android:src="@drawable/chat_message_96px"
+                            tools:ignore="ContentDescription" />
+                        
+                    </FrameLayout>
+                    
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toEndOf="@id/st_chat_icon_bx"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/st_chat_icon_bx"
+                        app:layout_constraintBottom_toBottomOf="@id/st_chat_icon_bx">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/st_chat_title"
+                            android:textColor="@color/colorPrimaryDark"
+                            style="@style/Theme.Dialog.FontMedium"
+                            android:textSize="15sp"
+                            android:text="@string/chats"/>
+    
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorDarkGray"
+                            android:textSize="13sp"
+                            android:text="@string/manage_chats"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGrayLight"
+                    android:id="@+id/st_chat_ntf_sep"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/st_chat_box"/>
+    
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/st_ntf_box"
+                    android:layout_marginTop="12dp"
+                    android:paddingVertical="4dp"
+                    app:layout_constraintTop_toBottomOf="@id/st_chat_ntf_sep"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+        
+                    <FrameLayout
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:id="@+id/st_ntf_icon_bx"
+                        android:background="@drawable/small_initial_background"
+                        android:backgroundTint="@android:color/holo_blue_dark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:adjustViewBounds="true"
+                            app:tint="@color/white"
+                            android:layout_gravity="center"
+                            android:src="@drawable/alarm_96px"
+                            tools:ignore="ContentDescription" />
+        
+                    </FrameLayout>
+        
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toEndOf="@id/st_ntf_icon_bx"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/st_ntf_icon_bx"
+                        app:layout_constraintBottom_toBottomOf="@id/st_ntf_icon_bx">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/st_ntf_title"
+                            android:textColor="@color/colorPrimaryDark"
+                            style="@style/Theme.Dialog.FontMedium"
+                            android:textSize="15sp"
+                            android:text="@string/notifications"/>
+            
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorDarkGray"
+                            android:textSize="13sp"
+                            android:text="@string/notifications_info"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+    
+                </androidx.constraintlayout.widget.ConstraintLayout>
+    
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGrayLight"
+                    android:id="@+id/st_ntf_ref_sep"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/st_ntf_box"/>
+    
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/st_ref_box"
+                    android:layout_marginTop="12dp"
+                    android:paddingVertical="4dp"
+                    app:layout_constraintTop_toBottomOf="@id/st_ntf_ref_sep"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+        
+                    <FrameLayout
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:id="@+id/st_ref_icon_bx"
+                        android:background="@drawable/small_initial_background"
+                        android:backgroundTint="@android:color/holo_purple"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:adjustViewBounds="true"
+                            app:tint="@color/white"
+                            android:layout_gravity="center"
+                            android:src="@drawable/share_3_96px"
+                            tools:ignore="ContentDescription" />
+        
+                    </FrameLayout>
+        
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toEndOf="@id/st_ref_icon_bx"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/st_ref_icon_bx"
+                        app:layout_constraintBottom_toBottomOf="@id/st_ref_icon_bx">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/st_ref_title"
+                            android:textColor="@color/colorPrimaryDark"
+                            style="@style/Theme.Dialog.FontMedium"
+                            android:textSize="15sp"
+                            android:text="@string/refer_and_earn"/>
+            
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorDarkGray"
+                            android:textSize="13sp"
+                            android:text="@string/refer_and_earn_info"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+    
+                </androidx.constraintlayout.widget.ConstraintLayout>
+    
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/colorGrayLight"
+                    android:id="@+id/st_ref_hlp_sep"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/st_ref_box"/>
+    
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/st_help_box"
+                    android:layout_marginTop="12dp"
+                    android:paddingVertical="4dp"
+                    app:layout_constraintTop_toBottomOf="@id/st_ref_hlp_sep"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+        
+                    <FrameLayout
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:id="@+id/st_help_icon_bx"
+                        android:background="@drawable/small_initial_background"
+                        android:backgroundTint="@android:color/holo_green_light"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:adjustViewBounds="true"
+                            app:tint="@color/white"
+                            android:layout_gravity="center"
+                            android:src="@drawable/help_96px"
+                            tools:ignore="ContentDescription" />
+        
+                    </FrameLayout>
+        
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toEndOf="@id/st_help_icon_bx"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/st_help_icon_bx"
+                        app:layout_constraintBottom_toBottomOf="@id/st_help_icon_bx">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/st_help_title"
+                            android:textColor="@color/colorPrimaryDark"
+                            style="@style/Theme.Dialog.FontMedium"
+                            android:textSize="15sp"
+                            android:text="@string/help"/>
+            
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorDarkGray"
+                            android:textSize="13sp"
+                            android:text="@string/help_info"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+    
+                </androidx.constraintlayout.widget.ConstraintLayout>
+    
+                
+            </androidx.constraintlayout.widget.ConstraintLayout>
+    
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/st_signout_box"
+                android:padding="12dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_cardview_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/st_other_box">
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_out"
+                    style="@style/Theme.Dialog.FontMedium"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/holo_red_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,9 +21,12 @@
     <color name="colorBackground">#FCFCFC</color>
     
     <integer-array name="color_initial_bgs">
-        <item>@color/colorAccent</item>
+        <item>@android:color/holo_blue_dark</item>
         <item>@color/purple_500</item>
         <item>@android:color/holo_green_light</item>
         <item>@android:color/holo_orange_dark</item>
+        <item>@color/purple_700</item>
+        <item>@android:color/holo_orange_light</item>
+        <item>@android:color/holo_blue_bright</item>
     </integer-array>
 </resources>
