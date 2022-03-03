@@ -4,6 +4,7 @@ import static utils.Util.getInitial;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
@@ -91,6 +92,8 @@ public class SettingActivity extends AppCompatActivity {
 					mAuth.signOut();
 				}
 				waitDialog.doDismiss();
+				startActivity(new Intent(selfRef, StartActivity.class));
+				finishAffinity();
 			});
 		});
 	}
